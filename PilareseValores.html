@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu com Submenus</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Helvetica+Neue+Light&display=swap">
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Helvetica Neue', sans-serif;
+            flex-direction: column;
+            margin: 30;
+            padding: 10;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            font-family: 'Arial', sans-serif;
+            
+        }
+
+        
+
+        
+
+        /* Header Styles */
+        .header-container {
+            background-color: #293377;
+            color: white;
+        }
+
+        header {
+            background-color: #293377;
+            color: white;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-container {
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+
+        nav {
+            display: flex;
+        }
+
+        .menu {
+            list-style: none;
+            display: flex;
+            margin-right: 100px; /* Adicionei uma margem esquerda para mover o menu para a esquerda */
+        }
+    
+
+        .menu a {
+            text-decoration: none;
+            letter-spacing: 5px;
+            font-family: 'Helvetica Neue Medium', sans-serif;
+            color: #f5f1f1;
+            font-size: 18px;
+        }
+
+        .main-menu {
+            list-style: none;
+            display: flex;
+            margin-right: 100px;
+        }
+
+        .menu li {
+            position: relative;
+            margin: 0 15px;
+            cursor: pointer; /* Adiciona cursor pointer para indicar que é clicável */
+            list-style: none;
+            display: flex;
+            margin-left: 20; /* Adiciona uma margem esquerda para mover o menu para a esquerda */
+            
+        }
+
+        .main-menu a {
+            text-decoration: none;
+            letter-spacing: 4px;
+            font-family: 'Helvetica Neue regular', sans-serif;
+            color: #f5f1f1;
+            font-size: 18px;
+            transition: color 0.3s ease-in-out;
+        }
+
+        .main-menu li {
+            position: relative;
+            margin: 0 15px;
+            cursor: pointer;
+            list-style: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .menu-item:hover .submenu {
+            display: block;
+        }
+
+        .submenu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: rgba(10, 10, 10, 0.5);
+            padding: 5px;
+            box-shadow: 0 0 30px rgba(252, 251, 251, 0);
+            z-index: 2;
+            color: rgb(7, 7, 7);
+            transition: opacity 0.3s, visibility 0.3s, height 0.3s, background-color 0.9s;
+            
+        }
+
+        .submenu li:hover {
+            background-color: #FFDc0a; /* Cor de destaque quando passa o mouse sobre o item do submenu */
+        }
+
+        .menu-item:hover .submenu {
+            display: block;
+            opacity: 1;
+        }
+
+        .submenu li {
+            margin: 5px 0;
+            
+        }
+
+        .submenu.active {
+            display: block;
+        }
+
+        .mission-section {
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+
+        submenu a {
+            text-decoration: none;
+            font-size: 14px;
+            color: #293377;
+            padding: 8px 15px;
+        }
+
+        .submenu li:hover {
+            background-color: #FFDc0a;
+        }
+
+        /* Body Styles */
+        .body-container {
+            background-color: #fff;
+            color: #293377;
+        }
+
+        .content {
+            text-align: center;
+            margin: 20px;
+        }
+
+        img {
+            max-width: 90%;
+            height: auto;
+            display: block;
+            margin: 20px auto;
+        }
+
+        p {
+            text-align: justify;
+            margin: 0 0 1.5em;
+        }
+
+        /* Footer Styles */
+        .footer-container {
+            background-color: #293377;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .subtitle,
+        .logos-container,
+        .centered-text {
+            text-align: center;
+            margin: 20px;
+        }
+
+        /* Navigation Styles */
+        .navigation {
+            text-align: center;
+        }
+
+        .navigation ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .navigation li {
+            display: inline-block;
+            margin-right: 20px;
+            position: relative;
+        }
+
+        .navigation a {
+            text-decoration: none;
+            padding: 10px;
+            display: inline-block;
+            color: #333;
+        }
+
+        .submenu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            z-index: 2;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .navigation li:hover .submenu {
+            display: block;
+            opacity: 1;
+        }
+
+        .navigation a:focus+.submenu,
+        .submenu:hover {
+            display: block;
+            opacity: 1;
+        }
+
+        /* Additional Styles */
+        .container {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+            text-align: justify;
+            margin: 0 5cm; /* Margem de 5cm nas laterais */
+            max-width: calc(100% - 10cm); /* Largura máxima com margem de 5cm em cada lado */
+        }
+
+        #paragrafo1 {
+            margin-bottom: 20px; /* Adicione margem inferior entre os parágrafos */
+        }
+
+        .column {
+            width: 30%;
+            border: 1px solid #293377;
+            padding: 15px;
+            margin: 5px;
+            text-align: center;
+            color: white;
+            font-size: 14px;
+        }
+
+        .logo {
+            float: right;
+            width: 100px; /* Set the width of the logo */
+            height: auto;
+            margin-top: 20px; /* Adjust the margin as needed */
+        }
+        /* JavaScript Highlight on Hover */
+        
+
+        /* Additional Content Styles */
+        .container {
+            text-align: center;
+            background-color: #293377;
+            color: #fff;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            margin: 0 auto;
+        }
+
+        .footer-container {
+            background-color: #293377;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .logos-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            align-items: center;
+            text-align: center;
+            background-color: #f5f5f7;
+            padding: 30px;
+            color: #fff;
+        }
+
+        .logo {
+            display: inline-block;
+            margin: 0 0px;
+            text-align: center;
+        }
+
+        .logo img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .description {
+            font-weight: bold;
+            margin-bottom: 10px;
+            margin-top: 5px;
+        }
+
+        .logo-container {
+            display: inline-block;
+            vertical-align: middle;
+            text-align: left;
+            margin-left: 0px;
+            margin-bottom: 10cm;
+            margin: 0 1cm 0cm;
+        }
+
+        .logo-container img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .footer {
+            background-color: #293377;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .logos-container,
+        .centered-text {
+            background-color: #293377;
+            padding: 30px;
+            color: #f7f7fa;
+        }
+
+        .subtitle {
+            font-size: 20px;
+            display: inline-block;
+            vertical-align: middle;
+            margin-left: 10px;
+        }
+
+        .column {
+            display: inline-block;
+            vertical-align: top;
+            margin: 0 20px;
+            flex: 1;
+            text-align: center;
+        }
+
+        .column .custom-text {
+            color: #fcf9f9;
+            font-size: 16px;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        h2,
+        h1,
+        p {
+            margin: 0;
+        }
+
+        .separator {
+            clear: both;
+        }
+
+        .description,
+        .address,
+        .reserved,
+        .icon-item {
+            text-align: center;
+            margin: 20px 0;
+            color: white;
+        }
+
+        .reserved {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+        }
+
+        .description p,
+        .icon-item .description {
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .address p,
+        .icon-item p {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .reserved p {
+            background-color: #333;
+            padding: 10px;
+            color: white;
+            font-style: italic;
+        }
+
+        .icon-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .icon-item {
+            text-align: center;
+            margin: 30px;
+            color: white;
+            width: 100px;
+        }
+
+        .icon-item img {
+            width: 50px;
+            height: 50px;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .icon-item .description {
+            margin-top: 20px;
+        }
+
+        .icon-item p {
+            margin-top: 5px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .custom-text {
+            font-family: 'Helvetica Neue Light', Arial, sans-serif;
+            line-height: 1.5; /* Ajuste o valor conforme necessário para o espaçamento desejado */
+            text-align: center;
+            margin: 20px 0;
+            color: white;
+        }
+
+        .address p {
+            margin-bottom: 40px; /* Ajuste o valor conforme necessário para o espaçamento entre parágrafos */
+        }
+
+        .custom-text.description {
+            font-size: 16px;
+        }
+
+        .custom-text.address {
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+
+        .custom-text.reserved {
+            background-color: #f3ecec;
+            padding: 10px;
+            font-style: italic;
+        }
+
+        .custom-text.description p {
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .custom-text.address p {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .custom-text.reserved p {
+            background-color: #333;
+            padding: 10px;
+            color: white;
+            font-style: italic;
+        }
+
+
+
+        .pagina-pilares {
+            text-align: center;
+            
+            
+            
+        }
+        
+        .pagina-pilares h1 {
+            font-size: 2em; /* Tamanho da fonte do título */
+            color: #293377; /* Cor do texto, ajuste conforme necessário */
+        }
+        
+        .pagina-pilares h2 {
+            font-size: 1.5em; /* Tamanho da fonte do subtítulo */
+            color: #293377; /* Cor do texto, ajuste conforme necessário */
+        }
+        
+        .pagina-pilares .section {
+            margin: 40px 0;
+        }
+        
+        .pagina-pilares .icon {
+            width: 120px; /* Aumentando o tamanho do ícone */
+            height: 120px; /* Aumentando o tamanho do ícone */
+            background-color: #3498db; /* Cor do ícone, ajuste conforme necessário */
+            margin: 0 auto;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff; /* Cor do ícone, ajuste conforme necessário */
+        }
+        
+        .pagina-pilares p {
+            text-align: justify;
+            margin-bottom: 20px;
+            color: #293377; /* Cor do texto, ajuste conforme necessário */
+        }
+        
+        .pagina-pilares img {
+            max-width: 100%; /* Garante que as imagens não ultrapassem o contêiner */
+            height: auto;
+        }
+        
+
+
+
+        
+
+
+        /* Adicione esta regra de mídia para telas menores que 600 pixels (ex: celulares) */
+@media only screen and (max-width: 600px) {
+    header {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .menu {
+        margin-right: 0;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .menu-item {
+        margin: 10px 0;
+    }
+
+    .submenu {
+        position: static;
+        display: none;
+        background-color: rgba(10, 10, 10, 0.5);
+        box-shadow: none;
+        z-index: 2;
+        opacity: 1;
+        padding: 10px;
+        text-align: center;
+    }
+
+    .submenu.active {
+        display: block;
+    }
+
+    .main-menu a,
+    .submenu a {
+        font-size: 16px;
+    }
+
+    .subtitle {
+        margin-top: 20px;
+    }
+
+    .container {
+        flex-direction: column;
+    }
+
+    .column {
+        width: 100%;
+        margin: 10px 0;
+    }
+
+    .icon-item {
+        margin: 20px 0;
+    }
+
+    .icon-item img {
+        width: 50px;
+        height: 50px;
+        display: block;
+        margin: 0 auto;
+    }
+}
+
+    </style>
+</head>
+
+<body>
+
+    <!-- Header Section -->
+    <div class="header-container">
+        <header>
+            <div class="logo-container">
+                <img src="logo_colegio-removebg-preview (1).png" alt="Nossa Missão">
+            </div>
+            <nav>
+                <ul class="menu">
+                    <li class="menu-item">
+                        <a href="#">Quem Somos</a>
+                        <ul class="submenu">
+                            <a href="index.html" class="custom-text">Sobre Nós</a>
+                            <a href="historia.html" class="custom-text">Historia</a>
+                            <a href="PilareseValores.html" class="custom-text">Pilares e Valores</a>
+                            <a href="estrutura.html" class="custom-text">Nossa Estrutura</a>
+                        </ul>
+                    </li>
+                    <li class="menu-item">
+                        <a href="#">Ensinos</a>
+                        <ul class="submenu">
+                            <a href="niveisdeensino.html" class="custom-text">Ensinos</a>
+                            <a href="ensinos.html" class="custom-text">Projeto Bilíngue</a>
+                            <a href="materialsas.html" class="custom-text">Material SAS</a>
+                        </ul>
+                    </li>
+                    <li class="menu-item">
+                        <a href="#">Contato</a>
+                        <ul class="submenu">
+                            <a href="contato.html" class="custom-text">Contato</a>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+    </div>
+
+    <script>
+        // Adicione o seguinte script JavaScript
+    
+        document.addEventListener('DOMContentLoaded', function () {
+            // Selecione todos os itens do menu e submenu
+            const menuItems = document.querySelectorAll('.menu-item');
+    
+            // Adicione um ouvinte de evento para cada item do menu
+            menuItems.forEach(function (menuItem) {
+                const submenu = menuItem.querySelector('.submenu');
+    
+                menuItem.addEventListener('mouseenter', function () {
+                    // Adicione uma classe de destaque quando o mouse entra
+                    menuItem.classList.add('highlight');
+                    submenu.classList.add('active');
+                });
+    
+                menuItem.addEventListener('mouseleave', function () {
+                    // Remova a classe de destaque quando o mouse sai
+                    menuItem.classList.remove('highlight');
+                    submenu.classList.remove('active');
+                });
+            });
+        });
+    </script>
+    
+
+
+</head>
+
+    <body class="pagina-pilares">
+    <h1 id="titulo">Pilares e Valores</h1>
+    <p id="paragrafo1">Há mais de um século, o Colégio São Carlos é um farol de educação e integridade. Desde 1905, nossa instituição tem sido um lar onde a excelência acadêmica e os valores cristãos se encontram.</p>
+    <p id="paragrafo1">Aqui, buscamos criar vencedores para a vida, fundamentados na compaixão, respeito e inovação. Em nossa jornada educacional, cultivamos não apenas mentes brilhantes, mas tambem corações compassivos.</p>
+    <p id="paragrafo1">Explore conosco nossos pilares sólidos e valores profundos, que moldam a essência do Colégio São Carlos.</p>
+    <p id="paragrafo1">Seja bem-vindo a uma comunidade onde o conhecimento se encontra como o caráter, preparando cada aluno para um futuro promissor.</p>
+
+    <h2 id="subtitulo">Nossos Pilares</h2>
+
+    <div class="section">
+        <img src="noun-graduation-6258164-removebg-preview.png" alt="Icon 2" style="width: 100px; height: 100px;">
+        
+        <p class="description" id="descricao1">Educação de Qualidade desde 1905></p>
+        <p id="texto1">Compromisso inabalável com a excelência educacional ao longo de mais de um século.</p>
+    </div>
+
+    <div class="section">
+        <img src="noun-graduation-6258164-removebg-preview.png" alt="Icon 2" style="width: 100px; height: 100px;">
+        
+        <p class="description" id="descricao2">Valores Cristãos</p>
+        <p id="texto2">Fundamentado em principios éticos e morais, promovendo a empatia, respeito e amor ao proximo.</p>
+    </div>
+
+    <div class="section">
+        <img src="noun-graduation-6258164-removebg-preview.png" alt="Icon 2" style="width: 100px; height: 100px;">
+        
+        <p class="description" id="descricao3">Desenvolvimento Integral</p>
+        <p id="texto3">No Colégio São Carlos, garantimos o desenvolvimento integral dos alunos com uma ampla variedade de atividades, tanto de manhã quanto a tarde.</p>
+    </div>
+
+    <div class="section">
+        <img src="noun-graduation-6258164-removebg-preview.png" alt="Icon 2" style="width: 100px; height: 100px;">
+        
+        <p class="description" id="descricao4">Formação de Vencedores para a Vida</p>
+        <p id="texto4">Preparamos os alunos para enfrentar desafios, adotar a resiliência e desenvolver habilidades para o sucesso em todas as áreas da vida.</p>
+    </div>
+
+    <div class="section">
+        <img src="noun-graduation-6258164-removebg-preview.png" alt="Icon 2" style="width: 100px; height: 100px;">
+        
+        <p class="description" id="descricao5">Comunidade e Colaboração</p>
+        <p id="texto5">Favorecemos um ambiente de aprendizado inclusivo, onde a colaboração e a comunidade são valorizadas.</p>
+    </div>
+
+    <h2 id="subtitulo2">Nossos Valores:</h2>
+    <p id="paragrafo5">Estes valores fundamentais do Colegio São Carlos definem a essência da nossa comunidade educacional. O Respeito é a base, onde celebramos a diversidade e criamos um ambiente acolhedor. A Integridade é nossa bússula moral, guiando-nos na pratica da honestidade e ética em todas as Interações. A Compaixão é cultivada, incentivando a empatia e o apoio mútuo nas comunidades em que vivemos. A Inovação é a nossa aliada, estimulando a criatividade e preparando os alunos para um mundo em constante mudança.</p>
+    <p id="paragrafo5">Nossa comunidade tambem valorza a Determinação, promovendo a perseverança e o esforço contínuo na busca por metas. O Espirito Esportivo é uma lição de vida, ensinando valores como trabalho em equipe, disciplina e respeito pelo jogo. E, é claro, temos um compromisso inabalável com a Excelência Acadêmica, incentivando cada aluno a alcançar seu plenos potencial em todas as disciplinas.</p>
+    <p id="paragrafo5">Além desses valores essenciais, nosso Colégio São Carlos, tambem cultivamos um profundo respeito pelo meio ambiente. Reconhecemos a importância de preservar nosso planeta para as gerações futuras.</p>
+    <p id="paragrafo5">Esses valores não apenas moldam nosso alunos academicamente, mas também os preparam para serem cidadãos conscientes, compassivos e inovadores, prontos para enfrentar os desafios e contribuir positivamente para o mundo ao seu redor. No Colégio São Carlos, não apenas ensinamos, mas também cultivamos esses valores, formando indivíduos que não apenas se destacam no presente, mas tambem moldam o futuro com integridade, compaixão e excelência.</p>
+</body>
+    <!-- Footer -->
+<div class="footer-container">
+
+    <!-- Logo e Subtítulo -->
+    <div class="container">
+        <div class="logo-container">
+            <img src="logo_colegio-removebg-preview (1).png" alt="Nossa Missão">
+        </div>
+
+        <div class="subtitle">
+            Valores eternos,<br>tempos modernos
+        </div>
+    </div>
+
+    <!-- Três Colunas -->
+    <div class="container">
+        <!-- Column 1 -->
+        <div class="column">
+            <a href="index.html" class="custom-text">Quem Somos</a>
+            <a href="historia.html" class="custom-text">Historia</a>
+            <a href="PilareseValores.html" class="custom-text">Pilares e Valores</a>
+            <a href="quem_somos.html" class="custom-text">Estrutura</a>
+        </div>
+
+        <!-- Column 2 -->
+        <div class="column">
+            <a href="niveisdeensino.html" class="custom-text">Ensinos</a>
+            <a href="ensinos.html" class="custom-text">Projeto Bilíngue</a>
+            <a href="materialsas.html" class="custom-text">Material SAS</a>
+        </div>
+
+        <!-- Column 3 -->
+        <div class="column">
+            <a href="contato.html" class="custom-text">Contato</a>
+        </div>
+    </div>
+
+    <div class="separator"></div>
+    <div class="icon-container">
+        <div class="icon-item">
+            <img src="12.png" alt="Icon 1" style="width: 100px; height: 100px;">
+            <div class="description">ActiveSoft- Siga</div>
+            <div class="text">Acesso às informações pedagogicas administrativas.</div>
+        </div>
+        <div class="icon-item">
+            <img src="13.png" alt="Icon 2" style="width: 100px; height: 100px;">
+            <div class="description">Class App</div>
+            <div class="text">Acesso ao aplicativo de comunicação com nossa instituição.</div>
+        </div>
+        <div class="icon-item">
+            <img src="14.png" alt="Icon 3" style="width: 100px; height: 100px;">
+            <div class="description">Portal SAS</div>
+            <div class="text">Acesso ao Eureka, Educacross, livros digitais, avaliações, simulados, entre outras ferramentas.</div>
+        </div>
+        <div class="icon-item">
+            <img src="15.png" alt="Icon 4" style="width: 100px; height: 100px;">
+            <div class="description">StandFlor Evolution</div>
+            <div class="text">Informações sobre o nosso programa bilíngue.</div>
+        </div>
+    </div>
+
+    <div class="separator"></div>
+<div class="custom-text description">
+</div>
+<div class="separator"></div>
+<div class="custom-text address">
+    <p>Rua Episcopal, 1859 - Centro. São Carlos/SP</p>
+    <p>(16) 3362-5044</p>
+    <p>Todos os direitos reservados @ 2023 Colégio São Carlos. Proteger a propriedade intelectual e garantir
+        a sua segurança online.</p>
+
+
+</div>
+
+    <script src="scripts.js"></script>
+</body>
+</html>
+
+    
+
+
+
+    

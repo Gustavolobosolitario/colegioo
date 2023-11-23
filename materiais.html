@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu com Submenus</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Helvetica+Neue+Light&display=swap">
+    <style>
+        /* General Styles */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            
+        }
+        /* Header Styles */
+        .header-container {
+            background-color: #293377;
+            color: white;
+        }
+
+        header {
+            background-color: #293377;
+            color: white;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-container {
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+
+        nav {
+            display: flex;
+        }
+
+        .menu {
+            list-style: none;
+            display: flex;
+            margin-right: 100px; /* Adicionei uma margem esquerda para mover o menu para a esquerda */
+        }
+    
+
+        .menu a {
+            text-decoration: none;
+            letter-spacing: 5px;
+            font-family: 'Helvetica Neue Medium', sans-serif;
+            color: #f5f1f1;
+            font-size: 18px;
+        }
+
+        .main-menu {
+            list-style: none;
+            display: flex;
+            margin-right: 100px;
+        }
+
+        .menu li {
+            position: relative;
+            margin: 0 15px;
+            cursor: pointer; /* Adiciona cursor pointer para indicar que é clicável */
+            list-style: none;
+            display: flex;
+            margin-left: 20; /* Adiciona uma margem esquerda para mover o menu para a esquerda */
+            
+        }
+
+        .main-menu a {
+            text-decoration: none;
+            letter-spacing: 4px;
+            font-family: 'Helvetica Neue regular', sans-serif;
+            color: #f5f1f1;
+            font-size: 18px;
+            transition: color 0.3s ease-in-out;
+        }
+
+        .main-menu li {
+            position: relative;
+            margin: 0 15px;
+            cursor: pointer;
+            list-style: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .menu-item:hover .submenu {
+            display: block;
+        }
+
+        .submenu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: rgba(10, 10, 10, 0.5);
+            padding: 5px;
+            box-shadow: 0 0 30px rgba(252, 251, 251, 0);
+            z-index: 2;
+            color: rgb(7, 7, 7);
+            transition: opacity 0.3s, visibility 0.3s, height 0.3s, background-color 0.9s;
+            
+        }
+
+        .submenu li:hover {
+            background-color: #FFDc0a; /* Cor de destaque quando passa o mouse sobre o item do submenu */
+        }
+
+        .menu-item:hover .submenu {
+            display: block;
+            opacity: 1;
+        }
+
+        .submenu li {
+            margin: 5px 0;
+            
+        }
+
+        .submenu.active {
+            display: block;
+        }
+
+        .mission-section {
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+
+        .submenu a {
+            text-decoration: none;
+            font-size: 14px;
+            color: #293377;
+            padding: 8px 15px;
+        }
+
+        .submenu li:hover {
+            background-color: #FFDc0a;
+        }
+
+        /* Body Styles */
+        .body-container {
+            background-color: #fff;
+            color: #293377;
+        }
+
+        .content {
+            text-align: center;
+            margin: 20px;
+        }
+
+        img {
+            max-width: 90%;
+            height: auto;
+            display: block;
+            margin: 20px auto;
+        }
+
+        p {
+            text-align: justify;
+            margin: 0 0 1.5em;
+        }
+
+        /* Footer Styles */
+        .footer-container {
+            background-color: #293377;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .subtitle,
+        .logos-container,
+        .centered-text {
+            text-align: center;
+            margin: 20px;
+        }
+
+        /* Navigation Styles */
+        .navigation {
+            text-align: center;
+        }
+
+        .navigation ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .navigation li {
+            display: inline-block;
+            margin-right: 20px;
+            position: relative;
+        }
+
+        .navigation a {
+            text-decoration: none;
+            padding: 10px;
+            display: inline-block;
+            color: #333;
+        }
+
+        .submenu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            z-index: 2;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .navigation li:hover .submenu {
+            display: block;
+            opacity: 1;
+        }
+
+        .navigation a:focus+.submenu,
+        .submenu:hover {
+            display: block;
+            opacity: 1;
+        }
+
+        /* Additional Styles */
+        .container {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+        }
+
+        .column {
+            width: 30%;
+            border: 1px solid #293377;
+            padding: 15px;
+            margin: 5px;
+            text-align: center;
+            color: white;
+            font-size: 14px;
+        }
+
+        .logo {
+            float: right;
+            width: 100px; /* Set the width of the logo */
+            height: auto;
+            margin-top: 20px; /* Adjust the margin as needed */
+        }
+        /* JavaScript Highlight on Hover */
+        
+
+        /* Additional Content Styles */
+        .container {
+            text-align: center;
+            background-color: #293377;
+            color: #fff;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            margin: 0 auto;
+        }
+
+        .footer-container {
+            background-color: #293377;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .logos-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            align-items: center;
+            text-align: center;
+            background-color: #f5f5f7;
+            padding: 30px;
+            color: #fff;
+        }
+
+        .logo {
+            display: inline-block;
+            margin: 0 0px;
+            text-align: center;
+        }
+
+        .logo img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .description {
+            font-weight: bold;
+            margin-bottom: 10px;
+            margin-top: 5px;
+        }
+
+        .logo-container {
+            display: inline-block;
+            vertical-align: middle;
+            text-align: left;
+            margin-left: 0px;
+            margin-bottom: 10cm;
+            margin: 0 1cm 0cm;
+        }
+
+        .logo-container img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .footer {
+            background-color: #293377;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .logos-container,
+        .centered-text {
+            background-color: #293377;
+            padding: 30px;
+            color: #f7f7fa;
+        }
+
+        .subtitle {
+            font-size: 20px;
+            display: inline-block;
+            vertical-align: middle;
+            margin-left: 10px;
+        }
+
+        .column {
+            display: inline-block;
+            vertical-align: top;
+            margin: 0 20px;
+            flex: 1;
+            text-align: center;
+        }
+
+        .column .custom-text {
+            color: #fcf9f9;
+            font-size: 16px;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        h2,
+        h1,
+        p {
+            margin: 0;
+        }
+
+        .separator {
+            clear: both;
+        }
+
+        .description,
+        .address,
+        .reserved,
+        .icon-item {
+            text-align: center;
+            margin: 20px 0;
+            color: white;
+        }
+
+        .reserved {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+        }
+
+        .description p,
+        .icon-item .description {
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .address p,
+        .icon-item p {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .reserved p {
+            background-color: #333;
+            padding: 10px;
+            color: white;
+            font-style: italic;
+        }
+
+        .icon-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .icon-item {
+            text-align: center;
+            margin: 30px;
+            color: white;
+            width: 100px;
+        }
+
+        .icon-item img {
+            width: 50px;
+            height: 50px;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .icon-item .description {
+            margin-top: 20px;
+        }
+
+        .icon-item p {
+            margin-top: 5px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .custom-text {
+            font-family: 'Helvetica Neue Light', Arial, sans-serif;
+            line-height: 1.5; /* Ajuste o valor conforme necessário para o espaçamento desejado */
+            text-align: center;
+            margin: 20px 0;
+            color: white;
+        }
+
+        .address p {
+            margin-bottom: 40px; /* Ajuste o valor conforme necessário para o espaçamento entre parágrafos */
+        }
+
+        .custom-text.description {
+            font-size: 16px;
+        }
+
+        .custom-text.address {
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+
+        .custom-text.reserved {
+            background-color: #f3ecec;
+            padding: 10px;
+            font-style: italic;
+        }
+
+        .custom-text.description p {
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .custom-text.address p {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .custom-text.reserved p {
+            background-color: #333;
+            padding: 10px;
+            color: white;
+            font-style: italic;
+        }
+
+
+        /* Adicione esta regra de mídia para telas menores que 600 pixels (ex: celulares) */
+@media only screen and (max-width: 600px) {
+    header {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .menu {
+        margin-right: 0;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .menu-item {
+        margin: 10px 0;
+    }
+
+    .submenu {
+        position: static;
+        display: none;
+        background-color: rgba(10, 10, 10, 0.5);
+        box-shadow: none;
+        z-index: 2;
+        opacity: 1;
+        padding: 10px;
+        text-align: center;
+    }
+
+    .submenu.active {
+        display: block;
+    }
+
+    .main-menu a,
+    .submenu a {
+        font-size: 16px;
+    }
+
+    .subtitle {
+        margin-top: 20px;
+    }
+
+    .container {
+        flex-direction: column;
+    }
+
+    .column {
+        width: 100%;
+        margin: 10px 0;
+    }
+
+    .icon-item {
+        margin: 20px 0;
+    }
+
+    .icon-item img {
+        width: 50px;
+        height: 50px;
+        display: block;
+        margin: 0 auto;
+    }
+}
+
+    </style>
+</head>
+
+<body>
+
+    <!-- Header Section -->
+    <div class="header-container">
+        <header>
+            <div class="logo-container">
+                <img src="logo_colegio-removebg-preview (1).png" alt="Nossa Missão">
+            </div>
+            <nav>
+                <ul class="menu">
+                    <li class="menu-item">
+                        <a href="#">Quem Somos</a>
+                        <ul class="submenu">
+                            <a href="index.html" class="custom-text">Sobre Nós</a>
+                            <a href="historia.html" class="custom-text">Historia</a>
+                            <a href="#" class="custom-text">Pilares e Valores</a>
+                            <a href="nossaestrut.html" class="custom-text">Nossa Estrutura</a>
+                        </ul>
+                    </li>
+                    <li class="menu-item">
+                        <a href="#">Ensinos</a>
+                        <ul class="submenu">
+                            <li><a href="niveisdeensino">Níveis de Ensino</a></li>
+                            <li><a href="#">Projeto Bilíngue</a></li>
+                            <li><a href="materiais.html">Material SAS</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item">
+                        <a href="#">Contato</a>
+                        <ul class="submenu">
+                            <li><a href="contato.html">Contato</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+    </div>
+
+    <script>
+        // Adicione o seguinte script JavaScript
+    
+        document.addEventListener('DOMContentLoaded', function () {
+            // Selecione todos os itens do menu e submenu
+            const menuItems = document.querySelectorAll('.menu-item');
+    
+            // Adicione um ouvinte de evento para cada item do menu
+            menuItems.forEach(function (menuItem) {
+                const submenu = menuItem.querySelector('.submenu');
+    
+                menuItem.addEventListener('mouseenter', function () {
+                    // Adicione uma classe de destaque quando o mouse entra
+                    menuItem.classList.add('highlight');
+                    submenu.classList.add('active');
+                });
+    
+                menuItem.addEventListener('mouseleave', function () {
+                    // Remova a classe de destaque quando o mouse sai
+                    menuItem.classList.remove('highlight');
+                    submenu.classList.remove('active');
+                });
+            });
+        });
+    </script>
+    
+
+
+    <!-- Body Section -->
+    <div class="body-container">
+        <div class="content">
+            
+            <div class="content-container" style="max-width: 60%; margin: 20px auto; text-align: justify;">
+                <img src="6-removebg-preview.png" alt="Sua Imagem" style="max-width: 100%; height: auto; display: block; margin: 0 auto;">
+                <img src="garotinha.png" alt="Sua Imagem" style="max-width: 100%; height: auto; display: block; margin: 0 auto;">
+                <p>O SAS Educação é uma plataforma de educação que oferece soluções completas e integradas para as escolas parceiras.</p>
+                <p>Atualmente, conta com mais de 1.100 escolas parceiraas em todo o Brasil. Sia atuação inclui livros didáticos alinhados à BNCC, e vai muito além disso! Trabalha com modelos de avaliações para cada etapada vida escolar, com formações continuadas para gestão e docência e com consultorias especializadas.</p>
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/8-Il3QAiYTk&t=16s" frameborder="0" allowfullscreen></iframe>
+                <p>O SAS esta aqui para trabalhar em parceria daqueles que se dedicam todos os dias para alcançar o sonho de uma Educação de excelência, garantindo o desenvolvimento completo dos nossos estudantes e os preparando para o mundo. Fazemos o que fazemos porque acreditamos que a Educação transforma pessoas, e pessoas transformam o mundo.</p>
+
+                    <h2>Soluções SAS</h2>
+                    <p>Soluções integradas aos objetivos de uma educação personalizada e de excelência. Isso e SAS!</p>
+                <img src="1-removebg-preview.png" alt="Sua Imagem" style="max-width: 100%; height: auto; display: block; margin: 0 auto;">
+                <img src="2-removebg-preview.png" alt="Sua Imagem" style="max-width: 100%; height: auto; display: block; margin: 0 auto;">
+                <img src="3-removebg-preview.png" alt="Sua Imagem" style="max-width: 100%; height: auto; display: block; margin: 0 auto;">
+                <img src="4-removebg-preview.png" alt="Sua Imagem" style="max-width: 100%; height: auto; display: block; margin: 0 auto;">
+                <h2>Resultados SAS</h2>
+                <p>Estudar para ir mais longe é i ideal que nos move e leva a resultados cada vez melhores.</p>
+                <img src="5-removebg-preview.png" alt="Sua Imagem" style="max-width: 100%; height: auto; display: block; margin: 0 auto;">
+                
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+<div class="footer-container">
+
+    <!-- Logo e Subtítulo -->
+    <div class="container">
+        <div class="logo-container">
+            <img src="logo_colegio-removebg-preview (1).png" alt="Nossa Missão">
+        </div>
+
+        <div class="subtitle">
+            Valores eternos,<br>tempos modernos
+        </div>
+    </div>
+
+    <!-- Três Colunas -->
+    <div class="container">
+        <!-- Column 1 -->
+        <div class="column">
+            <a href="index.html" class="custom-text">Quem Somos</a>
+            <a href="historia.html" class="custom-text">Historia</a>
+            <a href="PilareseValores.html" class="custom-text">Pilares e Valores</a>
+            <a href="nossaestrut.html" class="custom-text">Estrutura</a>
+        </div>
+
+        <!-- Column 2 -->
+        <div class="column">
+            <a href="niveisdeensino.html"class="custom-text">Níveis de Ensino</a>
+            <a href="#"class="custom-text">Projeto Bilíngue</a>
+            <a href="materiais.html"class="custom-text">Material SAS</a>
+        </div>
+
+        <!-- Column 3 -->
+        <div class="column">
+            <li><a href="contato.html"class="custom-text">Contato</a></li>
+        </div>
+    </div>
+
+    <div class="separator"></div>
+    <div class="icon-container">
+        <div class="icon-item">
+            <img src="12.png" alt="Icon 1" style="width: 100px; height: 100px;">
+            <div class="description">ActiveSoft- Siga</div>
+            <div class="text">Acesso às informações pedagogicas administrativas.</div>
+        </div>
+        <div class="icon-item">
+            <img src="13.png" alt="Icon 2" style="width: 100px; height: 100px;">
+            <div class="description">Class App</div>
+            <div class="text">Acesso ao aplicativo de comunicação com nossa instituição.</div>
+        </div>
+        <div class="icon-item">
+            <img src="14.png" alt="Icon 3" style="width: 100px; height: 100px;">
+            <div class="description">Portal SAS</div>
+            <div class="text">Acesso ao Eureka, Educacross, livros digitais, avaliações, simulados, entre outras ferramentas.</div>
+        </div>
+        <div class="icon-item">
+            <img src="15.png" alt="Icon 4" style="width: 100px; height: 100px;">
+            <div class="description">StandFlor Evolution</div>
+            <div class="text">Informações sobre o nosso programa bilíngue.</div>
+        </div>
+    </div>
+
+    <div class="separator"></div>
+<div class="custom-text description">
+</div>
+<div class="separator"></div>
+<div class="custom-text address">
+    <p>Rua Episcopal, 1859 - Centro. São Carlos/SP</p>
+    <p>(16) 3362-5044</p>
+    <p>Todos os direitos reservados @ 2023 Colégio São Carlos. Proteger a propriedade intelectual e garantir
+        a sua segurança online.</p>
+
+
+</div>
+
+    <script src="scripts.js"></script>
+</body>
+</html>
+
+    
+
+
+
+    

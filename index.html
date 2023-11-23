@@ -1,0 +1,1329 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Helvetica Neue Medium', sans-serif;
+            box-sizing: border-box;
+            
+        }
+    
+    header {
+        background-color: #293377;
+        color: white;
+        padding: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .logo {
+        font-size: 1.5em;
+        font-weight: bold;
+        margin-right: right; /* Mover o logo para a esquerda */
+        
+    }
+    
+    nav {
+        display: flex;
+    }
+    
+    .menu {
+        list-style: none;
+        display: flex;
+        margin-right: 100px; /* Adicionei uma margem esquerda para mover o menu para a esquerda */
+    }
+
+    .menu a {
+        text-decoration: none;
+        letter-spacing: 5px;
+        font-family: 'Helvetica Neue Medium', sans-serif;
+        color: #f5f1f1;
+        font-size: 18px;
+    }
+
+    .menu li {
+        position: relative;
+        margin: 0 15px;
+        cursor: pointer; /* Adiciona cursor pointer para indicar que é clicável */
+        list-style: none;
+        display: flex;
+        margin-left: 20; /* Adiciona uma margem esquerda para mover o menu para a esquerda */
+        
+    }
+    
+    .menu-item:hover .submenu {
+        display: block;
+    }
+
+    .submenu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background-color: rgba(252, 246, 246, 0.5);
+        padding: 10px;
+        box-shadow: 0 0 30px rgba(252, 251, 251, 0);
+        z-index: 2;
+        color: rgb(7, 7, 7);
+        transition: opacity 0.3s, visibility 0.3s, height 0.3s;
+        transition: background-color 0.3s; /* Adiciona transição para o efeito de destaque */
+    }
+    
+    .submenu li:hover {
+        background-color: #FFDc0a; /* Cor de destaque quando passa o mouse sobre o item do submenu */
+    }
+
+    .submenu.active {
+        display: block;
+    }
+
+    .submenu li {
+        margin: 5px 0;
+    }
+    
+    .video-section {
+        width: 100%;
+        overflow: hidden;
+    }
+    
+    video {
+        width: 100%;
+    }
+
+    .mission-section {
+        text-align: center;
+        margin: 20px 0;
+        position: relative;
+    }
+
+    
+    .section-header {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        margin-bottom: 50px;
+        text-align: center;
+        margin-bottom: 20px;
+        position: relative;
+    }
+
+
+
+    .title-line {
+        height: 3px;
+        background-color: #293377;
+        margin: 0 10px;
+        display: block;
+    }
+    
+    .title-line::before, .title-line::after {
+        content: "";
+        height: 3px;
+        background-color: #293377;
+        margin: 0 10px;
+        display: block;
+    }
+    
+    .title-line p {
+        display: inline-block;
+        font-weight: bold;
+        font-size: 18px;
+        margin: 0 20px;
+        color: #293377;
+    }
+    
+    .title-line::before {
+        content: "";
+        height: 3px;
+        background-color: #293377;
+        margin-bottom: 10px;
+        display: block;
+    }
+    
+    .title-line::after {
+        content: "";
+        height: 3px;
+        background-color: #293377;
+        margin-top: 10px;
+        display: block;
+    }
+
+
+    .saiba-mais-buttona {
+        display: block;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        color: #fff; /* Cor do texto */
+        background-color: transparent; /* Cor de fundo transparente para o contorno */
+        border: 2px solid #ffcc00; /* Cor do contorno amarelo */
+        border-radius: 5px; /* Borda arredondada */
+        margin-bottom: -400px;
+       
+
+        margin: 20px auto; /* Adiciona margem superior e inferior de 20px e centraliza horizontalmente */
+    }
+    
+    .centered-section {
+        text-align: center;
+        margin-bottom: -120px;
+    }
+
+
+    .right-image img {
+        width: 150%; /* Ajuste a largura conforme necessário */
+        margin-right: 20px; /* Ajuste o espaçamento à direita conforme necessário */
+    }
+    
+    
+    
+    
+
+    .centered-image {
+        width: 100%;
+        height: auto;
+        margin-top: 20px; /* Adiciona espaço entre o botão e a imagem */
+    }
+    
+    
+    .subtitle {
+        margin-top: 10px; /* Adiciona espaçamento entre o título e o subtítulo */
+        text-align: center;
+    }
+    
+    p {
+        font-family: 'Helvetica Neue', sans-serif;
+        font-weight: 300; /* Light */
+        color: #293377; /* Cor azul */
+        margin: 10px 0;
+    }
+    
+    h2 {
+        font-family: 'Helvetica Neue', sans-serif;
+        font-weight: 300; /* Light */
+        color: #293377; /* Cor azul */
+        font-size: 1.5em; /* Tamanho do título */
+    }
+    
+    .subtitle {
+        margin-bottom: 20px;
+        position: absolute;
+        top: 0;
+        text-align: center;
+        
+    }
+    
+    img {
+        max-width: 100%;
+        height: auto;
+        margin-top: 20px; /* Espaçamento entre o texto e a imagem */
+    }
+    
+    .content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .saiba-mais-button {
+        background-color: #293377; /* Cor de fundo */
+        color: #ffffff; /* Cor do texto */
+        padding: 10px 20px; /* Espaçamento interno */
+        border: none; /* Remove a borda */
+        border-radius: 5px; /* Borda arredondada */
+        cursor: pointer; /* Muda o cursor ao passar sobre o botão */
+        display: block; /* Torna o botão um bloco para centralizar */
+        margin: 20px auto; /* Centraliza o botão e adiciona margem */
+    }
+
+
+    .custom-container {
+        text-align: center; /* Centraliza o conteúdo */
+        padding: 30px; /* Adiciona espaço interno */
+    }
+
+    .custom-image {
+        width: 1200px; /* Define a largura desejada para a imagem */
+        height: auto; /* Mantém a proporção original da imagem */
+    }
+
+    .image-container {
+        display: flex; /* Usa flexbox para alinhar as imagens lado a lado */
+        justify-content: space-between; /* Distribui o espaço disponível entre as imagens */
+        margin-bottom: 20px; /* Adiciona margem inferior para separar das imagens */
+        
+    }
+
+    .image {
+        width: 100%; /* Define a largura das imagens */
+        height: auto; /* Mantém a proporção original */
+    }
+
+    .button {
+        padding: 10px 20px; /* Adiciona espaçamento interno ao botão */
+        font-size: 16px; /* Tamanho da fonte do botão */
+        background-color: #293377; /* Cor de fundo do botão */
+        color: white; /* Cor do texto do botão */
+        border: none; /* Remove a borda do botão */
+        border-radius: 4px; /* Adiciona cantos arredondados ao botão */
+        cursor: pointer; /* Adiciona o ícone de cursor de apontador ao botão */
+    }
+
+
+
+
+
+    .section-content {
+        display: flex;
+        justify-content: space-between;
+    }
+    
+    .yellow-text {
+        text-align: left;
+    }
+    
+    .image-side img {
+        width: 180%; /* Ajuste a largura da imagem conforme necessário */
+        height: auto; /* Mantém a proporção da imagem */
+    }
+
+
+
+
+
+
+
+
+
+    .saiba-mais-buttona {
+        display: inline-block;
+        background-color: yellow;
+        color: #293377; /* Set the text color to blue */
+        padding: 10px 20px;
+        text-decoration: none;
+        margin-top: 20px; /* Adjust the margin as needed */
+    }
+
+    .image-side {
+        margin-top: 20px; /* Adjust the margin as needed */
+    }
+
+    .icon-item img {
+        width: 60px; /* Set the width of the icons as needed */
+        height: 60px; /* Set the height of the icons as needed */
+    }
+
+
+
+    .yellow-section {
+        background-color: yellow;
+        padding: 20px 0; /* Adicione um preenchimento para espaçamento interno */
+    }
+
+    .yellow-text {
+        color: #FFDC0A; /* Set the text color to yellow */
+        font-size: 16px;
+    }
+
+    .icon-description {
+        font-size: 14px; /* Adjust the font size as needed */
+        text-align: center;
+        margin-bottom: 20px; /* Adicione um espaçamento inferior para separar os ícones */
+    }
+
+    .icon {
+        display: inline-block;
+        margin-bottom: 10px; /* Adicione um espaçamento inferior entre o ícone e a descrição */
+    }
+
+    .icon img {
+        width: 64px; /* Ajuste o tamanho do ícone conforme necessário */
+        height: 64px;
+    }
+
+    .icon-item {
+        text-align: center;
+    }
+
+    .icon-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        margin-top: 20px; /* Adjust the margin as needed */
+    }
+    
+    p {
+        font-family: 'Helvetica Neue', sans-serif;
+        font-weight: 300; /* Light */
+        color: #293377; /* Cor azul */
+        font-size: 1.5em; /* Tamanho do título */
+    }
+
+    /* Adicione esses estilos no seu arquivo styles.css */
+.blue-section {
+        background-color: #3498db; /* Cor azul da faixa */
+        color: #ffffff; /* Cor do texto */
+        padding: 40px 0; /* Adicione espaçamento interno */
+    }
+
+    .container {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between; /* Optional: Adjust the spacing between icons */
+        max-width: 1200px;
+        margin: 0 auto;
+        overflow: hidden; /* Clearfix para conter flutuações internas */
+    }
+
+    .content {
+        float: left;
+        width: 60%; /* Largura do conteúdo com a descrição */
+    }
+
+    .image-side {
+        margin-top: 20px; /* Adjust the margin as needed */
+        margin-right: 20px; /* Adjust the negative margin-right to move the image to the left */
+        float: right;
+        width: 40%; /* Largura da imagem */
+        text-align: center;
+    }
+
+    .image-side img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    h2, h3 {
+        margin-bottom: 10px;
+    }
+
+    .icon-container {
+        display: flex;
+        justify-content: space-around;
+        margin-top: 20px;
+    }
+
+    .icon-item {
+        text-align: center;
+    }
+
+    .icon-item img {
+        width: 64px; /* Ajuste o tamanho do ícone conforme necessário */
+        height: 64px;
+    }
+
+    .content-section {
+        background-color: #293377; /* Set the background color to blue */
+        color: #FFDc0a(255, 255, 255)55, 255, 255; /* Set the text color to white */
+        padding: 20px; /* Add padding for better spacing */
+    }
+
+    .container {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .icon-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        margin-top: 20px; /* Adjust the margin as needed */
+    }
+
+    .icon-item {
+        text-align: center;
+    }
+
+    .carousel-nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: absolute;
+        top: 50%;
+        left: 0;
+        right: 0;
+        transform: translateY(-50%);
+        margin-top: 20px; /* Adjust the margin-top as needed */
+    }
+
+    .carousel-nav span {
+        font-size: 24px; /* Adjust the font size as needed */
+        cursor: pointer;
+        color: #FFDc0a; /* Set the color to yellow */
+        margin: 0 10px; /* Adjust the margin between arrows as needed */
+    }
+
+    .section-container {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .image-container {
+        position: relative;
+        width: 100%;
+        max-width: 600px; /* Set the maximum width of the image container */
+        margin: 0 auto; /* Center the image container */
+    }
+
+    .icon-overlay {
+        position: absolute;
+        top: 10px; /* Adjust the top position of the icon */
+        left: 10px; /* Adjust the left position of the icon */
+        width: 50px; /* Set the width of the icon */
+        height: 50px; /* Set the height of the icon */
+        /* Add your icon styles here */
+    }
+
+    .text-below-image {
+        text-align: center;
+    }
+
+    .title-subtitle-text {
+        max-width: 400px; /* Set the maximum width of the text container */
+        margin: 0 auto; /* Center the text container */
+    }
+    .title-subtitle-text p {
+        font-size: 14px; /* Ajuste o tamanho da fonte conforme necessário */
+    }
+
+    .icons-below {
+        text-align: center;
+        margin-top: 20px; /* Adjust the margin as needed */
+    }
+
+    .logo {
+        float: right;
+        width: 100px; /* Set the width of the logo */
+        height: auto;
+        margin-top: 20px; /* Adjust the margin as needed */
+    }
+
+    .saiba-mais-button {
+        display: block;
+        margin: 30px auto; /* Adjust the margin as needed */
+        padding: 10px 20px;
+        background-color: #FFDC0A; /* Yellow color */
+        color: #000; /* Black text color */
+        text-decoration: none;
+        text-align: center;
+    }
+
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+    }
+
+    .footer {
+        background-color: #293377;
+        padding: 20px;
+        color: white;
+        text-align: center;
+    }
+
+    .logo {
+        width: 50px; /* Adjust the width of the logo as needed */
+        height: auto;
+        margin-right: 10px; /* Adjust the margin as needed */
+        vertical-align: middle;
+    }
+
+    .description {
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    .separator {
+        border-top: 1px solid white;
+        margin: 20px 0;
+    }
+
+    .menu-container {
+        display: flex;
+        justify-content: space-around;
+        margin: 20px 0;
+    }
+
+    .menu {
+        flex: 1;
+        padding: 0 10px;
+    }
+
+    .icon-container {
+        display: flex;
+        justify-content: space-around;
+        margin: 20px 0;
+    }
+
+    .icon-item {
+        text-align: center;
+    }
+
+    .address {
+        margin: 20px 0;
+    }
+
+    .reserved {
+        margin-top: 20px;
+    }
+
+    .section-container {
+        background-color: #fff; /* Adicione a cor de fundo desejada */
+        padding: 20px;
+    }
+    
+    .container {
+        display: flex;
+        align-items: center;
+    }
+    
+    .image-container {
+        position: relative;
+        
+    }
+    
+    .icon-overlay {
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+    
+    .content-container {
+        flex-grow: 1;
+        margin-left: 20px; /* Ajuste a margem conforme necessário */
+    }
+    
+    .icons-container {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        margin-top: 60px; /* Adapte conforme necessário */
+    }
+    
+    .icons-below img {
+        width: 50px; /* Ajuste o tamanho do ícone conforme necessário */
+        height: auto;
+        margin-bottom: 10px; /* Adicione um espaçamento entre os ícones */
+        margin-top: 20px;
+    }
+    
+    .logo {
+        max-width: 100px; /* Ajuste o tamanho conforme necessário */
+    }
+    
+    .saiba-mais-button {
+        display: block;
+        margin-top: 20px; /* Ajuste a margem conforme necessário */
+        padding: 10px 20px;
+        background-color: #FFDC0A; /* Yellow color */
+        color: #000; /* Black text color */
+        text-decoration: none;
+        text-align: center;
+    }
+
+    .image-container {
+        position: relative;
+        width: 100%;
+        max-width: 300px;
+        margin: 0 auto; /* Centraliza a imagem */
+    }
+
+
+
+    .custom-container1 {
+        text-align: center; /* Centraliza o conteúdo */
+        padding: 20px; /* Adiciona espaçamento interno */
+    }
+
+    .image.custom-container1 {
+        margin-bottom: 20px; /* Adiciona margem inferior abaixo da imagem */
+    }
+
+    .image {
+        width: 900px; /* Define a largura desejada para a imagem */
+        height: auto; /* Mantém a proporção original da imagem */
+    }
+
+    .button {
+        padding: 10px 20px; /* Adiciona espaçamento interno ao botão */
+        font-size: 16px; /* Tamanho da fonte do botão */
+        background-color: #293377; /* Cor de fundo verde para o botão */
+        color: white; /* Cor do texto branco para o botão */
+        border: none; /* Remove a borda do botão */
+        border-radius: 4px; /* Adiciona cantos arredondados ao botão */
+        cursor: pointer; /* Adiciona o ícone de cursor de apontador ao botão */
+    }
+
+
+    /* Footer Styles */
+    .footer-container {
+        background-color: #293377;
+        color: #fff;
+        text-align: center;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+
+    .subtitle,
+    .logos-container,
+    .centered-text {
+        text-align: center;
+        margin: 20px;
+    }
+
+    .separator {
+        clear: both;
+    }
+
+
+    .container {
+        text-align: center;
+        background-color: #293377;
+        color: #fff;
+        padding: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        margin: 0 auto;
+    }
+
+    .footer-container {
+        background-color: #293377;
+        color: #fff;
+        text-align: center;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+
+    .logos-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+        align-items: center;
+        text-align: center;
+        background-color: #f5f5f7;
+        padding: 30px;
+        color: #fff;
+    }
+
+    .logo {
+        display: inline-block;
+        margin: 0 0px;
+        text-align: center;
+    }
+
+    .logo img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .description {
+        font-weight: bold;
+        margin-bottom: 10px;
+        margin-top: 5px;
+    }
+
+    .logo-container {
+        display: inline-block;
+        vertical-align: middle;
+        text-align: left;
+        margin-left: 0px;
+        margin-bottom: 10cm;
+        margin: 0 1cm 0cm;
+    }
+
+    .logo-container img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .footer {
+        background-color: #293377;
+        color: #fff;
+        padding: 20px;
+        text-align: center;
+    }
+
+    .logos-container,
+    .centered-text {
+        background-color: #293377;
+        padding: 30px;
+        color: #f7f7fa;
+    }
+
+    .subtitle {
+        font-size: 20px;
+        display: inline-block;
+        vertical-align: middle;
+        margin-left: 10px;
+    }
+
+    .column {
+        display: inline-block;
+        vertical-align: top;
+        margin: 0 20px;
+        flex: 1;
+        text-align: center;
+    }
+
+    .column .custom-text {
+        color: #fcf9f9;
+        font-size: 16px;
+        text-decoration: none;
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    h2,
+    h1,
+    p {
+        margin: 20px;
+        color: #293377;
+        margin-bottom: 10px;
+    }
+
+    .separator {
+        clear: both;
+    }
+
+    .description,
+    .address,
+    .reserved,
+    .icon-item {
+        text-align: center;
+        margin: 20px 0;
+        color: white;
+    }
+
+    .reserved {
+        background-color: #333;
+        color: white;
+        padding: 10px;
+    }
+
+    .description p,
+    .icon-item .description {
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+    .address p,
+    .icon-item p {
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    .reserved p {
+        background-color: #333;
+        padding: 10px;
+        color: white;
+        font-style: italic;
+    }
+
+    .icon-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    .icon-item {
+        text-align: center;
+        margin: 30px;
+        color: white;
+        width: 100px;
+    }
+
+    .icon-item img {
+        width: 50px;
+        height: 50px;
+        display: block;
+        margin: 0 auto;
+    }
+
+    .icon-item .description {
+        margin-top: 20px;
+    }
+
+    .icon-item p {
+        margin-top: 5px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .custom-text {
+        font-family: 'Helvetica Neue Light', Arial, sans-serif;
+        line-height: 1.5; /* Ajuste o valor conforme necessário para o espaçamento desejado */
+        text-align: center;
+        margin: 20px 0;
+        color: white;
+    }
+
+    .address p {
+        margin-bottom: 40px; /* Ajuste o valor conforme necessário para o espaçamento entre parágrafos */
+    }
+
+    .custom-text.description {
+        font-size: 16px;
+    }
+
+    .custom-text.address {
+        font-size: 18px;
+        font-weight: bold;
+        text-align: center;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    
+
+    .custom-text.reserved {
+        background-color: #f3ecec;
+        padding: 10px;
+        font-style: italic;
+    }
+
+    .custom-text.description p {
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+    .custom-text.address p {
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    .custom-text.reserved p {
+        background-color: #333;
+        padding: 10px;
+        color: white;
+        font-style: italic;
+    }
+
+    .content-container {
+        margin-bottom: 20px;
+    }
+
+    .image-section {
+        text-align: center;
+        margin: 50px;
+    }
+
+    .image-item {
+        margin-bottom: 50px;
+        text-align: left;
+    }
+
+
+    .centered-section {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh; /* Define a altura da seção para 100% da altura da viewport */
+        background-color: #f4f4f4; /* Cor de fundo da seção */
+    }
+    
+    .centered-image {
+        max-width: 100%;
+        max-height: 100%;
+        border-radius: 5px; /* Adiciona borda arredondada à imagem (opcional) */
+    }
+
+    .section-container {
+        position: relative;
+    }
+    
+
+    .custom-section {
+        text-align: center;
+        position: relative;
+        margin: 20px;
+    }
+    
+    .custom-image {
+        max-width: 100%; /* Garante que a imagem não ultrapasse a largura do contêiner */
+        height: auto; /* Mantém a proporção da imagem */
+        border-radius: 5px; /* Adiciona borda arredondada à imagem (opcional) */
+    }
+
+
+    .button1 {
+        position: absolute;
+        top: 79%;
+        left: 33%;
+        transform: translate(-50%, -50%);
+        padding: 10px 20px;
+        font-size: 18px;
+        background-color: #021024;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+
+
+
+    .custom-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    .image-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .image {
+        width: 200%;
+        height: auto;
+        object-fit: cover;
+        border-radius: 10px;
+        margin: 10px;
+    }
+    
+    .button {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background-color 0.2s ease;
+    }
+    
+    .button:hover {
+        background-color: #0056b3;
+    }
+
+
+
+    @media only screen and (max-width: 600px) {
+        header {
+            flex-direction: column; /* Altera a direção da flexbox para empilhar em telas pequenas */
+            text-align: center; /* Centraliza o texto no cabeçalho */
+        }
+    
+        .logo {
+            margin-right: 0; /* Remove a margem à direita no logo */
+            margin-bottom: 10px; /* Adiciona margem inferior para separar o logo do menu */
+        }
+    
+        .menu {
+            margin-right: 0; /* Remove a margem à direita no menu */
+        }
+    
+        .menu-item {
+            margin: 0; /* Remove a margem nos itens do menu */
+        }
+    
+        .submenu {
+            position: static; /* Altera a posição do submenu para estática */
+            display: none; /* Esconde o submenu por padrão */
+            text-align: left; /* Alinha o texto à esquerda no submenu */
+        }
+    
+        .menu-item:hover .submenu {
+            display: block; /* Exibe o submenu quando o item do menu é destacado */
+        }
+    
+        .video-section,
+        .mission-section,
+        .image-side,
+        .right-image img,
+        .centered-section,
+        .centered-image,
+        .custom-container,
+        .image,
+        .button1 {
+            width: 100%; /* Define a largura para 100% na tela pequena */
+        }
+    }
+        /* Add your CSS styles here */
+        /* ... */
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo"></div>
+        <img src="logo_colegio-removebg-preview (1).png" alt="Nossa Missão">
+        <nav>
+            <ul class="menu">
+                <li class="menu-item">
+                    <a href="#">Quem Somos</a>
+                    <!-- Submenu para Quem Somos -->
+                    <ul class="submenu">
+
+                        <li><a href="historia.html">Historia</a></li>
+                        <li><a href="#">Pilares e Valores</a></li>
+                        <li><a href="nossaestrut.html">Nossa Estrutura</a></li>
+                    </ul>
+                </li>
+                <li class="menu-item">
+                    <a href="#">Ensinos</a>
+                    <!-- Submenu para Ensinos -->
+                    <ul class="submenu">
+                        <li><a href="niveisdeensino.html">Níveis de Ensino</a></li>
+                        <li><a href="#">Projeto Bilíngue</a></li>
+                        <li><a href="materiais.html">Material SAS</a></li>
+
+                    </ul>
+                </li>
+
+                <li class="menu-item">
+                    <a href="#">Contato</a>
+                    <!-- Submenu para Contato -->
+                    <ul class="submenu">
+                        <li><a href="contato.html">Contato</a></li>
+
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <script>
+        // Adicione o seguinte script JavaScript
+
+        document.addEventListener('DOMContentLoaded', function () {
+            // Selecione todos os itens do menu e submenu
+            const menuItems = document.querySelectorAll('.menu-item');
+
+            // Adicione um ouvinte de evento para cada item do menu
+            menuItems.forEach(function (menuItem) {
+                const submenu = menuItem.querySelector('.submenu');
+
+                menuItem.addEventListener('mouseenter', function () {
+                    // Adicione uma classe de destaque quando o mouse entra
+                    menuItem.classList.add('highlight');
+                    submenu.classList.add('active');
+                });
+
+                menuItem.addEventListener('mouseleave', function () {
+                    // Remova a classe de destaque quando o mouse sai
+                    menuItem.classList.remove('highlight');
+                    submenu.classList.remove('active');
+                });
+            });
+        });
+    </script>
+
+    <!-- Video Section -->
+    <section class="video-section">
+        <video src="Video banner.mp4" autoplay loop muted></video>
+    </section>
+
+    <!-- Nossa Missão Section -->
+    <section class="mission-section">
+        <div class="section-header">
+            <div class="title-line"></div>
+            <p>SOBRE NÓS</p>
+            <div class="title-line"></div>
+        </div>
+        <div class="subtitle"></div>
+            <h1>Quem Somos</h1>
+            <div class="subtitle"></div>
+           
+        </div>
+        <img src="colegio.png" alt="Nossa Missão">
+        <p>Desde 1905 somos uma escola que mantém uma tradição de ensino de alta qualidade que nos diferencia das outras
+            da cidade e região.
+            Nossos alunos recebem não apenas uma educação sólida, mas também são incentivados a serem cidadãos ativos e
+            positivos em nossa sociedade.
+            Contamos com um rico capital intelectual de professores excepcionalmente qualificados e experientes, que
+            demonstram o compromisso contínuo com a sua própria atualização na área educacional e desenvolvimento
+            pessoal.</p>
+        </div>
+    </div>
+
+
+
+            <!-- Botão "Saiba Mais" contornado em amarelo -->
+            <a href="#" class="saiba-mais-buttona">Saiba Mais</a>
+        </div>
+
+    </section>
+
+    <div class="centered-section">
+        <img src="167778.png" alt="Imagem Centralizada" class="centered-image">
+    </div>
+
+
+    <!-- Título, Subtítulo, Texto, Ícones, Imagem e Botão -->
+    <section class="content-section">
+        <div class="container">
+            <div>
+                <h2 class="yellow-text">Níveis de Ensino</h2>
+                <h1 class="yellow-text">Educação Infantil</h1>
+                <p class="yellow-text">Nosso compromisso com o ensino de qualidade inicia-se na Educação Infantil,
+                    sendo a primeira etapa da Educação Básica. para promover o desenvolvimento integral de nossos
+                    alunos, desde pequenos, contamos com material didático completo.</p>
+
+                <!-- Ícones com descrição -->
+                <div class="icon-container">
+                    <div class="icon-item">
+                        <img src="7.png" alt="Ícone 1">
+                        <p>Descrição do Ícone 1</p>
+                    </div>
+                    <div class="icon-item">
+                        <img src="6.png" alt="Ícone 2">
+                        <p>Descrição do Ícone 2</p>
+                    </div>
+                </div>
+
+                <!-- Botão "Saiba Mais" contornado em amarelo -->
+                <a href="#" class="saiba-mais-buttona">Saiba Mais</a>
+            </div>
+
+            <!-- Imagem ao lado do texto -->
+            <div class="image-side right-image">
+                <img src="educacao infantil corrigido1.png" alt="Imagem ao lado do texto">
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="container">
+            <!-- ... (rest of your content) ... -->
+
+            <!-- Setas para navegação no carrossel -->
+            <div class="carousel-nav">
+                <span class="prev"></span>
+                <span class="next"></span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Primeiro bloco -->
+<div class="custom-container">
+    <div class="image-container">
+        <img src="125s.png" alt="Imagem 1" class="image">
+        <img src="125s55.png" alt="Imagem 2" class="image">
+    </div>
+    <a href="https://www.youtube.com/watch?v=fbFXunR0kEE&t=5s" class="button">Saber Mais</a>
+</div>
+
+<!-- Segundo bloco -->
+<div class="custom-container">
+    <div class="image-container">
+        <img src="165.png" alt="Imagem 1" class="image">
+        <img src="166.png" alt="Imagem 2" class="image">
+    </div>
+    <a href="https://saseducacao.com.br/" class="button">Saber Mais</a>
+</div>
+
+<!-- Terceiro bloco -->
+<div class="section-container">
+    <div class="custom-section">
+        <img src="1677.png" alt="Imagem Editável" class="custom-image">
+        <a href="https://portalsas.com.br/login?redirect=https%3A%2F%2Fhome.portalsas.com.br%2F" class="button1">Saber Mais</a>
+    </div>
+</div>
+    <!-- Footer -->
+    <div class="footer-container">
+
+        <!-- Logo e Subtítulo -->
+        <div class="container">
+            <div class="logo-container">
+                <img src="logo_colegio-removebg-preview (1).png" alt="Nossa Missão">
+            </div>
+
+            <div class="custom-subtitle">
+                Valores eternos,<br>tempos modernos
+            </div>
+        </div>
+
+        <!-- Três Colunas -->
+        <div class="container">
+            <!-- Column 1 -->
+            <div class="column">
+                <a href="index.html" class="custom-text">Sobre Nós</a>
+                <a href="historia.html" class="custom-text">Historia</a>
+                <a href="#" class="custom-text">Pilares e Valores</a>
+                <a href="nossaestrut.html" class="custom-text">Nossa Estrutura</a>
+            </div>
+
+            <!-- Column 2 -->
+            <div class="column">
+                <a href="niveisdeensino.html" class="custom-text">Ensinos</a>
+                <a href="ensinos.html" class="custom-text">Projeto Bilíngue</a>
+                <a href="materialsas.html" class="custom-text">Material SAS</a>
+            </div>
+
+            <!-- Column 3 -->
+            <div class="column">
+                <a href="contato.html" class="custom-text">Contato</a>
+
+            </div>
+        </div>
+
+        <div class="separator"></div>
+        <div class="icon-container">
+            <div class="icon-item">
+                <img src="12.png" alt="Icon 1" style="width: 100px; height: 100px;">
+                <div class="description">ActiveSoft- Siga</div>
+                <div class="text">Acesso às informações pedagogicas administrativas.</div>
+            </div>
+            <div class="icon-item">
+                <img src="13.png" alt="Icon 2" style="width: 100px; height: 100px;">
+                <div class="description">Class App</div>
+                <div class="text">Acesso ao aplicativo de comunicação com nossa instituição.</div>
+            </div>
+            <div class="icon-item">
+                <img src="14.png" alt="Icon 3" style="width: 100px; height: 100px;">
+                <div class="description">Portal SAS</div>
+                <div class="text">Acesso ao Eureka, Educacross, livros digitais, avaliações, simulados, entre outras
+                    ferramentas.</div>
+            </div>
+            <div class="icon-item">
+                <img src="15.png" alt="Icon 4" style="width: 100px; height: 100px;">
+                <div class="description">StandFlor Evolution</div>
+                <div class="text">Informações sobre o nosso programa bilíngue.</div>
+
+            </div>
+        </div>
+        <div>
+
+
+
+
+        </div>
+
+
+        <div class="separator"></div>Rua Episcopal, 1859 - Centro. São Carlos/SP
+
+
+        <div class="separator"></div>(16) 3362-5044
+
+
+        <div class="separator"></div>Todos os direitos reservados @ 2023 Colégio São Carlos. Proteger a propriedade
+        intelectual e garantir
+        a sua segurança online.
+
+
+    </div>
+
+    <script src="scripts.js"></script>
+</body>
+
+</html>
